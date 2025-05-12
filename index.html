@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madhav Kathuria | B.Tech CSE Student</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #e11d48;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --light-gray: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill {
+            background-color: var(--light-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .education-item, .experience-item, .project-item {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .education-item:hover, .experience-item:hover, .project-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .item-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .item-subtitle {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .item-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-links {
+            margin-top: auto;
+            padding-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-link i {
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: none;
+            z-index: 100;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero h2 {
+                font-size: 1rem;
+            }
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .logo,
+        body.dark-mode nav a,
+        body.dark-mode .hero h1,
+        body.dark-mode .item-title,
+        body.dark-mode .section-title,
+        body.dark-mode .form-group label {
+            color: #f8fafc;
+        }
+
+        body.dark-mode .hero p,
+        body.dark-mode .item-description,
+        body.dark-mode footer {
+            color: #94a3b8;
+        }
+
+        body.dark-mode .education-item,
+        body.dark-mode .experience-item,
+        body.dark-mode .project-item {
+            background-color: #1e293b;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .skill {
+            background-color: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .social-link {
+            background-color: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .btn-outline {
+            color: #e2e8f0;
+            border-color: #e2e8f0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Madhav<span>.</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <img src="photo.jpg" alt="Madhav Kathuria" class="hero-image">
+            <h1>Madhav Kathuria</h1>
+            <h2>B.Tech Computer Science Student</h2>
+            <p>Passionate about technology, programming, and solving complex problems. Currently pursuing my B.Tech in Computer Science at South Asian University with expected graduation in 2028.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/madhav-kathuria/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/MadhavKathuria826" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="x.com" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/madhavk0208/" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a dedicated Computer Science student with a strong passion for software development, algorithms, and emerging technologies. My academic journey has equipped me with a solid foundation in computer science principles and practical programming skills.</p>
+                    <p>As an active member of the CSTC Club and ACM Student Chapter, I participate in coding competitions, hackathons, and tech workshops to enhance my skills and collaborate with like-minded individuals.</p>
+                    <p>When I'm not coding, you can find me reading about new technologies, contributing to open-source projects, or mentoring junior students in programming fundamentals.</p>
+                </div>
+                <div class="about-skills">
+                    <h3>My Skills</h3>
+                    <div class="skills">
+                        <span class="skill">C++</span>
+                        <span class="skill">Python</span>
+                        <span class="skill">Java</span>
+                        <span class="skill">HTML/CSS</span>
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">Data Structures</span>
+                        <span class="skill">Algorithms</span>
+                        <span class="skill">SQL</span>
+                        <span class="skill">Git</span>
+                        <span class="skill">Problem Solving</span>
+                        <span class="skill">Teamwork</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <h3 class="item-title">South Asian University</h3>
+                    <span class="item-date">2024 - 2028 (Expected)</span>
+                </div>
+                <h4 class="item-subtitle">Bachelor of Technology in Computer Science and Engineering</h4>
+                <p class="item-description">
+                    Currently pursuing my B.Tech in Computer Science with a focus on software development and algorithms. 
+                    Coursework includes Data Structures, Algorithms, Database Systems, Operating Systems, and Computer Networks.
+                </p>
+            </div>
+            <div class="education-item">
+                <div class="item-header">
+                    <h3 class="item-title">Higher Secondary School</h3>
+                    <span class="item-date">2022 - 2024</span>
+                </div>
+                <h4 class="item-subtitle">Science Stream (PCM with Computer Science)</h4>
+                <p class="item-description">
+                    Completed 12th grade with specialization in Physics, Chemistry, Mathematics, and Computer Science.
+                    Developed foundational programming skills in Python and C++ during this period.
+                </p>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title">Experience & Activities</h2>
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="item-title">CSTC Club Member</h3>
+                    <span class="item-date">2024 - Present</span>
+                </div>
+                <h4 class="item-subtitle">Technical Club, South Asian University</h4>
+                <p class="item-description">
+                    Active member of the Computer Science and Technology Club. Participate in coding competitions, 
+                    tech talks, and workshops. Collaborate with peers on projects and help organize technical events.
+                </p>
+            </div>
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="item-title">ACM Student Chapter</h3>
+                    <span class="item-date">2024 - Present</span>
+                </div>
+                <h4 class="item-subtitle">Association for Computing Machinery</h4>
+                <p class="item-description">
+                    Member of the ACM student chapter. Attend seminars on cutting-edge technologies, 
+                    participate in programming contests, and engage with the computer science community.
+                </p>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <h3 class="item-title">Student Management System</h3>
+                    <p class="item-description">
+                        A console-based application developed in C++ to manage student records, grades, and attendance.
+                        Implemented file handling for data persistence and various search/sort algorithms.
+                    </p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <h3 class="item-title">E-commerce Website</h3>
+                    <p class="item-description">
+                        A responsive e-commerce website built with HTML, CSS, and JavaScript. 
+                        Features product listings, shopping cart functionality, and a checkout process.
+                    </p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <h3 class="item-title">Weather App</h3>
+                    <p class="item-description">
+                        A weather application that fetches data from a public API and displays current weather conditions.
+                        Developed using Python with Flask backend and JavaScript frontend.
+                    </p>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Madhav Kathuria. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved user preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Apply the saved theme
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            
+            // Update button icon
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            
+            // Save user preference
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+        
+        // Form submission handling
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send the data to a server
+            // For this example, we'll just log it and show an alert
+            console.log({ name, email, subject, message });
+            
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
